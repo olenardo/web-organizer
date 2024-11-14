@@ -1,4 +1,5 @@
 mod routes;
+mod controllers;
 
 use tokio::net::TcpListener;
 
