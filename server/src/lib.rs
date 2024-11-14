@@ -1,4 +1,5 @@
-use axum::{routing::get, Router};
+mod routes;
+
 use tokio::net::TcpListener;
 
 pub async fn run() {
@@ -6,11 +7,9 @@ pub async fn run() {
         .await
         .unwrap();
 
-    let app = Router::new()
-        .route("/", get(|| async move {
-            String::from("Response from the server")
-        }))
-            .into_make_service();
+    let app = routes::routes()
+        .await
+        .into_make_service();
     
     axum::serve(
         listener,
